@@ -1,0 +1,649 @@
+/* General Dashboard Layout */
+.dashboard-container {
+    display: flex;
+    min-height: 100vh;
+    background-color: var(--color-light-gray); /* Default light background */
+    position: relative;
+    overflow: hidden; /* Ensure content stays within */
+    /* Dynamic background for the entire dashboard */
+    --school-badge-bg: none; /* Default none */
+}
+
+/* Subtle background image for the entire dashboard, using the school badge */
+.dashboard-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: var(--school-badge-bg); /* Use CSS variable */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.05; /* Very subtle */
+    z-index: 0;
+    pointer-events: none; /* Allow clicks to pass through */
+}
+
+.sidebar {
+    width: 280px;
+    background-color: var(--color-dark-blue);
+    color: var(--color-white);
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    z-index: 10; /* Ensure sidebar is above the subtle background */
+}
+
+.sidebar-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.sidebar-header .logo img {
+    max-width: 150px;
+    height: auto;
+}
+
+.profile-summary {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.profile-summary img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--color-primary);
+    margin-bottom: 10px;
+}
+
+.profile-summary h3 {
+    margin: 10px 0 5px;
+    color: var(--color-white);
+    font-size: 1.2rem;
+}
+
+.profile-summary p {
+    font-size: 0.9rem;
+    color: var(--color-light-gray);
+}
+
+.sidebar-nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar-nav li {
+    margin-bottom: 10px;
+}
+
+.sidebar-nav a {
+    color: var(--color-light-gray);
+    text-decoration: none;
+    padding: 12px 15px;
+    display: flex;
+    align-items: center;
+    border-radius: var(--border-radius);
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.sidebar-nav a i {
+    margin-right: 10px;
+    font-size: 1.1rem;
+}
+
+.sidebar-nav a:hover,
+.sidebar-nav a.active {
+    background-color: var(--color-primary-dark);
+    color: var(--color-white);
+}
+
+.main-content {
+    flex-grow: 1;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.95); /* Slightly transparent white for content */
+    border-radius: var(--border-radius);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+    margin: 20px; /* Space around the main content area */
+    z-index: 1; /* Above the subtle background */
+    position: relative; /* For z-index to work */
+}
+
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.main-header h1 {
+    color: var(--color-dark-blue);
+    font-size: 2rem;
+    margin: 0;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.header-actions .icon-button {
+    background: none;
+    border: none;
+    color: var(--color-gray);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.header-actions .icon-button:hover {
+    color: var(--color-primary);
+}
+
+.profile-dropdown {
+    position: relative;
+    cursor: pointer;
+}
+
+.profile-dropdown .profile-thumb {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--color-primary);
+}
+
+.profile-dropdown .dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: var(--color-white);
+    min-width: 160px;
+    box-shadow: var(--shadow);
+    border-radius: var(--border-radius);
+    z-index: 1;
+    margin-top: 10px;
+    overflow: hidden;
+}
+
+.profile-dropdown .dropdown-content a {
+    color: var(--color-dark-gray);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.2s ease;
+}
+
+.profile-dropdown .dropdown-content a:hover {
+    background-color: var(--color-light-gray);
+}
+
+.profile-dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Dashboard Sections */
+.dashboard-section {
+    background-color: var(--color-white);
+    padding: 25px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 25px;
+}
+
+.dashboard-section h2 {
+    color: var(--color-dark-blue);
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+/* Welcome Card */
+.registration-status-card {
+    background-color: var(--color-white);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden; /* Important for background image */
+}
+
+.registration-status-card.has-background-badge {
+    background-size: cover; /* Cover the entire area */
+    background-position: center right; /* Position it to the right */
+    background-repeat: no-repeat; /* Don't repeat the image */
+    background-blend-mode: overlay; /* Blend mode for subtle effect */
+    background-color: var(--color-white); /* Base color for blending */
+    position: relative;
+}
+
+/* Optional: Add a subtle overlay to ensure text readability */
+.registration-status-card.has-background-badge::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to right, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 60%, rgba(255,255,255,0.3) 100%);
+    z-index: 1; /* Place overlay above background image */
+}
+
+.registration-status-card.has-background-badge > * {
+    position: relative; /* Ensure content is above the overlay */
+    z-index: 2;
+}
+
+.registration-status-card .card-content {
+    flex-grow: 1;
+}
+
+.registration-status-card .welcome-title {
+    font-size: 2.2rem;
+    color: var(--color-dark-blue);
+    margin-bottom: 10px;
+}
+
+.registration-status-card .welcome-title .highlight {
+    color: var(--color-primary);
+    text-decoration: underline;
+}
+
+.registration-status-card .welcome-message {
+    font-size: 1.1rem;
+    color: var(--color-dark-gray);
+    margin-bottom: 20px;
+}
+
+.registration-status-card .status-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 15px;
+    border-radius: var(--border-radius-pill);
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.registration-status-card .status-badge i {
+    margin-right: 8px;
+}
+
+.registration-status-card .status-badge.approved {
+    background-color: var(--color-success-light);
+    color: var(--color-success);
+}
+
+.registration-status-card .school-banner-img {
+    max-width: 250px;
+    height: auto;
+    border-radius: var(--border-radius);
+    margin-left: 20px;
+}
+
+/* Details Grid Layout */
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.detail-item {
+    background-color: var(--color-light-gray);
+    padding: 15px;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--color-border);
+}
+
+.detail-item strong {
+    color: var(--color-dark-blue);
+    display: block;
+    margin-bottom: 5px;
+}
+
+.detail-item span, .detail-item a {
+    color: var(--color-dark-gray);
+    font-size: 0.95rem;
+}
+
+.detail-item.full-width {
+    grid-column: 1 / -1; /* Spans all columns */
+}
+
+.school-badge-display {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.school-badge-display img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain; /* Use 'contain' for logos/badges */
+    background-color: var(--color-white); /* Ensure visible on various backgrounds */
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+}
+
+/* Quick Actions */
+.quick-actions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.action-card {
+    background-color: var(--color-primary-light);
+    color: var(--color-dark-blue);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    text-align: center;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 150px;
+}
+
+.action-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.action-card i {
+    font-size: 2.5rem;
+    color: var(--color-primary);
+    margin-bottom: 15px;
+}
+
+.action-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+    color: var(--color-dark-blue);
+}
+
+.action-card p {
+    font-size: 0.9rem;
+    color: var(--color-dark-gray);
+}
+
+/* Teams Overview */
+.team-filter {
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.team-filter label {
+    font-weight: bold;
+    color: var(--color-dark-blue);
+}
+
+.team-filter select {
+    padding: 8px 12px;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--color-border);
+    background-color: var(--color-white);
+    color: var(--color-dark-gray);
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+.team-gender-section {
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: var(--color-light-gray);
+    border-radius: var(--border-radius);
+}
+
+.team-gender-section h3 {
+    color: var(--color-dark-blue);
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 10px;
+}
+
+.team-category {
+    margin-bottom: 25px;
+}
+
+.team-category h4 {
+    color: var(--color-primary-dark);
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+}
+
+.players-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.player-card {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    padding: 15px;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.player-card:hover {
+    transform: translateY(-3px);
+}
+
+.player-photo-container {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 10px;
+    border: 2px solid var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-light-gray); /* Fallback background for empty photos */
+}
+
+.player-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.player-name {
+    font-size: 1.1rem;
+    color: var(--color-dark-blue);
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.player-info p {
+    font-size: 0.85rem;
+    color: var(--color-dark-gray);
+    margin: 2px 0;
+}
+
+.player-actions {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+}
+
+.player-actions button {
+    background: none;
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.player-actions .edit-btn {
+    color: var(--color-primary);
+}
+.player-actions .edit-btn:hover {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+
+.player-actions .delete-btn {
+    color: var(--color-danger);
+}
+.player-actions .delete-btn:hover {
+    background-color: var(--color-danger);
+    color: var(--color-white);
+}
+
+.no-players {
+    grid-column: 1 / -1; /* Span across all columns */
+    text-align: center;
+    color: var(--color-gray);
+    padding: 30px;
+    border: 1px dashed var(--color-border);
+    border-radius: var(--border-radius);
+    font-style: italic;
+}
+
+.error-message {
+    background-color: var(--color-danger-light);
+    color: var(--color-danger);
+    padding: 15px;
+    border-radius: var(--border-radius);
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.error-message i {
+    font-size: 1.2rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .sidebar {
+        width: 250px;
+        padding: 15px;
+    }
+    .main-content {
+        padding: 20px;
+        margin: 15px;
+    }
+    .main-header h1 {
+        font-size: 1.8rem;
+    }
+    .registration-status-card .welcome-title {
+        font-size: 1.8rem;
+    }
+    .registration-status-card .school-banner-img {
+        max-width: 200px;
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard-container {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+        height: auto;
+        padding: 15px 20px;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .sidebar-header {
+        margin-bottom: 0;
+    }
+    .profile-summary {
+        display: none; /* Hide profile summary on smaller screens */
+    }
+    .sidebar-nav {
+        display: none; /* Hide main nav on smaller screens, could be replaced with a hamburger menu */
+    }
+    .main-content {
+        margin: 15px;
+        padding: 20px;
+    }
+    .main-header {
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+    }
+    .main-header h1 {
+        width: 100%;
+        text-align: center;
+        font-size: 1.5rem;
+    }
+    .registration-status-card {
+        flex-direction: column;
+        text-align: center;
+    }
+    .registration-status-card .welcome-title {
+        font-size: 1.6rem;
+    }
+    .registration-status-card .school-banner-img {
+        margin-top: 20px;
+        margin-left: 0;
+    }
+
+    .registration-status-card.has-background-badge::before {
+        background: linear-gradient(to bottom, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 60%, rgba(255,255,255,0.3) 100%);
+    }
+
+    .details-grid, .quick-actions-grid, .players-grid {
+        grid-template-columns: 1fr;
+    }
+    .detail-item.full-width {
+        grid-column: auto;
+    }
+    .school-badge-display {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-content {
+        padding: 15px;
+        margin: 10px;
+    }
+    .dashboard-section {
+        padding: 15px;
+    }
+    .registration-status-card {
+        padding: 20px;
+    }
+    .registration-status-card .welcome-title {
+        font-size: 1.4rem;
+    }
+    .registration-status-card .welcome-message {
+        font-size: 1rem;
+    }
+}

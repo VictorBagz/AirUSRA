@@ -1,0 +1,185 @@
+/* ======== LEADERSHIP PAGE STYLES ======== */
+
+/* Hero Section */
+.leadership-hero {
+    height: 50vh;
+    position: relative;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0;
+    background: url('https://images.unsplash.com/photo-1517423568342-3259b35039f0?q=80&w=2070') no-repeat center center/cover;
+}
+
+.leadership-hero h1 {
+    font-size: 3.5rem;
+}
+
+/* Page Content Area */
+.page-content {
+    padding: 4rem 0;
+}
+
+.committee-section {
+    margin-bottom: 4rem;
+}
+
+.committee-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: var(--primary-red);
+    margin-bottom: 2.5rem;
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+.committee-section h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background-color: var(--secondary-yellow);
+}
+
+/* Executive Committee Grid */
+.excom-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.profile-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    padding: 2rem;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+}
+
+.profile-card img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 4px solid var(--primary-red);
+    object-fit: cover;
+    margin-bottom: 1rem;
+}
+
+.profile-card h3 {
+    margin: 0;
+    font-size: 1.4rem;
+    color: var(--text-dark);
+}
+
+.profile-card .title {
+    color: var(--primary-red);
+    font-weight: bold;
+    font-size: 1rem;
+    margin: 0.3rem 0;
+}
+
+.profile-card .school {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.contact-info a {
+    color: var(--text-dark);
+    margin: 0 0.5rem;
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+}
+.contact-info a:hover {
+    color: var(--primary-red);
+}
+
+/* Other Committee Lists */
+.committee-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    text-align: left;
+}
+
+.committee-list {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+.committee-list h3 {
+    color: var(--primary-red);
+    border-bottom: 2px solid #eee;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.committee-list ul {
+    list-style: none;
+}
+.committee-list li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+.committee-list li:last-child {
+    border-bottom: none;
+}
+.committee-list .role {
+    color: #777;
+    font-style: italic;
+}
+
+
+/* Regional Committees Table */
+.committee-table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.committee-table thead tr {
+    background-color: var(--primary-red);
+    color: white;
+    text-align: left;
+    font-weight: bold;
+}
+
+.committee-table th, .committee-table td {
+    padding: 12px 15px;
+}
+
+.committee-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+    background-color: white;
+}
+
+.committee-table tbody tr:nth-of-type(even) {
+    background-color: #f9f9f9;
+}
+
+.committee-table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+.committee-table a {
+    color: var(--primary-red);
+    text-decoration: none;
+}
+.committee-table a:hover {
+    text-decoration: underline;
+}

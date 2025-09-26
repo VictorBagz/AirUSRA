@@ -1,0 +1,171 @@
+// Wait for Supabase to be ready
+function waitForSupabase() {
+    return new Promise((resolve, reject) => {
+        if (window.supabaseClient) {
+            resolve(window.supabaseClient);
+            return;
+        }
+
+        let attempts = 0;
+        const maxAttempts = 20;
+        const interval = 250;
+
+        const checkSupabase = () => {
+            if (window.supabaseClient) {
+                resolve(window.supabaseClient);
+                return;
+            }
+
+            attempts++;
+            if (attempts >= maxAttempts) {
+                reject(new Error('Supabase client not available'));
+                return;
+            }
+
+            setTimeout(checkSupabase, interval);
+        };
+
+        checkSupabase();
+    });
+}
+
+// Function to display errors
+function showError(message, errorDisplay) {
+    errorDisplay.textContent = message;
+    errorDisplay.style.display = "block";
+    setTimeout(() => {
+        errorDisplay.style.opacity = "1";
+    }, 10);
+}
+
+// Function to hide errors
+function hideError(errorDisplay) {
+    errorDisplay.style.opacity = "0";
+    setTimeout(() => {
+        errorDisplay.style.display = "none";
+    }, 300);
+}
+
+// Function to fetch user profile and school data
+async function fetchUserData(userId, supabaseClient) {
+    try {
+        const { data: profile, error: profileError } = await supabaseClient
+            .from('profiles')
+            .select(`
+                *,
+                schools:school_id (
+                    id,
+                    school_name,
+                    center_number,
+                    school_email,
+                    region,
+                    district
+                )
+            `)
+            .eq('id', userId)
+            .single();
+
+        if (profileError) throw profileError;
+        return profile;
+    } catch (error) {
+        console.error('Error fetching user data:', error);
+        throw error;
+    }
+}
+
+// Function to handle redirect after successful profile fetch
+async function handleProfileRedirect(userId, supabaseClient, errorDisplay) {
+    try {
+        const profile = await fetchUserData(userId, supabaseClient);
+        sessionStorage.setItem('userProfile', JSON.stringify({
+            id: profile.id,
+            fullName: profile.full_name,
+            role: profile.role,
+            school: profile.schools
+        }));
+        
+        window.location.href = "dashboard.html";
+    } catch (error) {
+        showError("Error loading profile data. Please try again.", errorDisplay);
+        console.error('Redirect error:', error);
+    }
+}
+
+// Initialize sign in functionality
+async function initializeSignIn() {
+    try {
+        // Get UI elements
+        const signInForm = document.getElementById("signInForm");
+        const passwordInput = document.getElementById("password");
+        const passwordToggle = document.querySelector(".password-toggle");
+        const submitBtn = signInForm.querySelector('button[type="submit"]');
+        const errorDisplay = document.getElementById("error-message");
+
+        if (!signInForm || !passwordInput || !submitBtn || !errorDisplay) {
+            throw new Error('Required UI elements not found');
+        }
+
+        // Get Supabase client
+        const supabaseClient = await waitForSupabase();
+        console.log('Supabase client ready');
+
+        // Check existing session
+        const { data: { session }, error: sessionError } = await supabaseClient.auth.getSession();
+        
+        if (sessionError) {
+            console.error('Session check error:', sessionError);
+        } else if (session) {
+            await handleProfileRedirect(session.user.id, supabaseClient, errorDisplay);
+            return;
+        }
+
+        // Handle form submission
+        signInForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            hideError(errorDisplay);
+            
+            const email = document.getElementById("email").value;
+            const password = passwordInput.value;
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing In...';
+
+            try {
+                const { data, error } = await supabaseClient.auth.signInWithPassword({
+                    email,
+                    password
+                });
+
+                if (error) throw error;
+
+                await handleProfileRedirect(data.user.id, supabaseClient, errorDisplay);
+            } catch (error) {
+                console.error("Sign-In Error:", error);
+                showError(error.message || "Failed to sign in. Please check your credentials.", errorDisplay);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Sign In';
+            }
+        });
+
+        // Setup password visibility toggle
+        if (passwordToggle) {
+            passwordToggle.addEventListener("click", () => {
+                const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+                passwordInput.setAttribute("type", type);
+                passwordToggle.classList.toggle("fa-eye");
+                passwordToggle.classList.toggle("fa-eye-slash");
+            });
+        }
+
+    } catch (error) {
+        console.error('Initialization error:', error);
+        const errorDisplay = document.getElementById("error-message");
+        if (errorDisplay) {
+            showError("Failed to initialize application. Please refresh the page.", errorDisplay);
+        }
+    }
+}
+
+// Start initialization when DOM is ready
+document.addEventListener("DOMContentLoaded", initializeSignIn);

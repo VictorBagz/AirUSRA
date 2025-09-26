@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player Registration - USRA</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="registration.css"> <!-- Reusing some styles -->
+    <link rel="stylesheet" href="player-registration.css"> <!-- New specific styles -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+    <header id="navbar">
+        <div class="container">
+            <div class="nav-left">
+                <a href="dashboard.html" class="back-link"><i class="fas fa-arrow-left"></i><span>Back to Dashboard</span></a>
+            </div>
+            <div class="nav-center">
+                <h1 class="page-title">Player Registration</h1>
+            </div>
+            <div class="nav-right">
+                <!-- Placeholder for balance if needed -->
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="reg-hero">
+            <div class="hero-overlay"></div>
+            <div class="container hero-content">
+                <h1>New Player Registration</h1>
+                <p>Enter the details for the new player below.</p>
+            </div>
+        </section>
+        
+        <section class="registration-main">
+            <div class="container">
+                <div class="form-wrapper">
+                    <div id="form-error-message" class="error-message" style="display: none;"></div>
+                    <form id="playerRegistrationForm">
+                        <!-- Player Details -->
+                        <div class="form-step active">
+                            <h3 class="step-title"><i class="fas fa-user"></i> Player's Personal Details</h3>
+                            <div class="form-grid">
+                                <div class="form-group full-width">
+                                    <label for="playerPhoto">Player Photo*</label>
+                                    <div class="file-upload">
+                                        <input type="file" id="playerPhoto" class="file-input" accept="image/*" data-preview="photo-preview" required>
+                                        <label for="playerPhoto" class="file-label"><i class="fas fa-camera"></i><span class="file-label-text">Choose photo...</span></label>
+                                    </div>
+                                    <img id="photo-preview" class="image-preview" alt="Player Photo Preview">
+                                </div>
+                                <div class="form-group"><label for="firstName">First Name*</label><input type="text" id="firstName" required></div>
+                                <div class="form-group"><label for="middleName">Middle Name</label><input type="text" id="middleName"></div>
+                                <div class="form-group"><label for="lastName">Last Name*</label><input type="text" id="lastName" required></div>
+                                
+                                <div class="form-group dob-group">
+                                    <label>Date of Birth*</label>
+                                    <div class="dob-selectors">
+                                        <select id="dobDay" required><option value="">Day</option></select>
+                                        <select id="dobMonth" required><option value="">Month</option></select>
+                                        <select id="dobYear" required><option value="">Year</option></select>
+                                    </div>
+                                </div>
+                                <div class="form-group"><label for="age">Age</label><input type="text" id="age" disabled placeholder="Calculated automatically"></div>
+                            </div>
+
+                            <h3 class="step-title"><i class="fas fa-graduation-cap"></i> Academic Information</h3>
+                            <div class="form-grid">
+                                <div class="form-group"><label for="className">Class*</label><input type="text" id="className" required></div>
+                                <div class="form-group"><label for="lin">Learner's Identification Number (LIN)</label><input type="text" id="lin"></div>
+                                <div class="form-group"><label for="pleIndex">PLE Index Number*</label><input type="text" id="pleIndex" required></div>
+                                <div class="form-group"><label for="pleYear">PLE Year of Sitting*</label><input type="number" id="pleYear" required placeholder="YYYY"></div>
+                                <div class="form-group full-width">
+                                    <label for="pleCertificate">PLE Certificate/Results Slip*</label>
+                                     <div class="file-upload">
+                                        <input type="file" id="pleCertificate" class="file-input" accept=".pdf,image/*" required>
+                                        <label for="pleCertificate" class="file-label"><i class="fas fa-file-upload"></i><span class="file-label-text">Upload document...</span></label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h3 class="step-title"><i class="fas fa-users"></i> Parent/Guardian Information</h3>
+                            <div class="form-grid">
+                                <div class="form-group"><label for="parentRelationship">Relationship*</label><select id="parentRelationship" required><option value="">Select...</option><option>Father</option><option>Mother</option><option>Guardian</option></select></div>
+                                <div class="form-group"><label for="parentNames">Full Names*</label><input type="text" id="parentNames" required></div>
+                                <div class="form-group"><label for="parentContact">Contact*</label><input type="tel" id="parentContact" required></div>
+                                <div class="form-group"><label for="parentNin">NIN</label><input type="text" id="parentNin"></div>
+                                <div class="form-group full-width"><label for="parentResidence">Residence*</label><input type="text" id="parentResidence" required></div>
+                            </div>
+                            
+                            <div class="step-navigation">
+                                <button type="submit" id="submitBtn" class="btn btn-primary">Submit Player Registration</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-bottom"><p>© 2025 Uganda Schools Rugby Association. All Rights Reserved.</p></div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="createClient.js"></script>
+    <script src="player-registration.js"></script>
+</body>
+</html>

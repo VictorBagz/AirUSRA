@@ -1,0 +1,111 @@
+/* ======== SIGN IN PAGE STYLES ======== */
+.signin-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 85vh;
+    padding: 4rem 1rem;
+    background-color: var(--bg-light);
+}
+
+.signin-card {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
+}
+
+.signin-card h2 {
+    color: var(--primary-red);
+    margin-bottom: 0.5rem;
+    font-size: 2rem;
+}
+
+.signin-card p {
+    margin-bottom: 2rem;
+    color: #666;
+}
+
+#signInForm .form-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+#signInForm label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #555;
+}
+
+#signInForm input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+}
+
+#signInForm input:focus {
+    outline: none;
+    border-color: var(--primary-red);
+    box-shadow: 0 0 0 2px rgba(185, 28, 28, 0.2);
+}
+
+.password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.password-wrapper input {
+    width: 100%;
+    padding-right: 40px; /* Make space for the icon */
+}
+
+.password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #999;
+}
+
+.form-options {
+    text-align: right;
+    margin-top: -1rem;
+    margin-bottom: 1.5rem;
+}
+
+.forgot-password {
+    color: var(--primary-red);
+    font-size: 0.9rem;
+    text-decoration: none;
+}
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+#signInForm .btn-primary {
+    width: 100%;
+    padding: 0.9rem;
+    font-size: 1.1rem;
+}
+
+.redirect-link {
+    margin-top: 2rem;
+    font-size: 0.95rem;
+}
+
+.redirect-link a {
+    color: var(--primary-red);
+    font-weight: 600;
+    text-decoration: none;
+}
+.redirect-link a:hover {
+    text-decoration: underline;
+}
