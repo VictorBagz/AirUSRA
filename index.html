@@ -6,8 +6,16 @@
     <title>Uganda Schools Rugby Association (USRA)</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.goog    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
-    <script src="config.js"></script>    
+    <script>
+        // Ensure Supabase loads before other scripts
+        window.addEventListener('load', function() {
+            if (typeof supabase === 'undefined') {
+                console.error('Supabase client failed to load');
+            }
+        });
+    </script>
     <script src="createClient.js"></script>
+    <script src="config.js"></script>
     <script src="script.js"></script>
 </body>pis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -200,22 +208,22 @@ On behalf of the USRA Executive Committee, and on behalf of all our membership, 
                 <h2>Photo Album</h2>
                 <div class="gallery-grid">
                     <div class="gallery-item">
-                        <img src="photos/players/pi1%20(74)%20(1).jpg" alt="Rugby Action 1">
+                        <img src="./photos/players/pi1 (74) (1).jpg" alt="Rugby Action 1">
                     </div>
                      <div class="gallery-item">
-                        <img src="photos/players/pi1%20(16)%20(1).jpg" alt="Rugby Action 2">
+                        <img src="./photos/players/pi1 (16) (1).jpg" alt="Rugby Action 2">
                     </div>
                      <div class="gallery-item">
-                        <img src="photos/players/pi1%20(66)%20(1).jpg" alt="Rugby Action 3">
+                        <img src="./photos/players/pi1 (66) (1).jpg" alt="Rugby Action 3">
                     </div>
                      <div class="gallery-item">
-                        <img src="photos/players/pi1%20(44)%20(1).jpg" alt="Rugby Action 4">
+                        <img src="./photos/players/pi1 (44) (1).jpg" alt="Rugby Action 4">
                     </div>
                      <div class="gallery-item">
-                        <img src="photos/players/pi1%20(20)%20(1).jpg" alt="Rugby Action 5">
+                        <img src="./photos/players/pi1 (20) (1).jpg" alt="Rugby Action 5">
                     </div>
                      <div class="gallery-item">
-                        <img src="photos/players/pi1%20(51)%20(1).jpg" alt="Rugby Action 6">
+                        <img src="./photos/players/pi1 (51) (1).jpg" alt="Rugby Action 6">
                     </div>
                 </div>
             </div>
