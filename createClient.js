@@ -4,9 +4,6 @@
     const SUPABASE_URL = "https://yoerbisfayganfuuvfgc.supabase.co";
     const SUPABASE_ANON_KEY =
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlvZXJiaXNmYXlnYW5mdXV2ZmdjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg4NTU0MzcsImV4cCI6MjA3NDQzMTQzN30.f8iMGd8qgXMWgj4XLwfuHdBgx3TrVb6P9QuRNlszEU0";
-    
-    // Wait for the document to be ready
-    document.addEventListener('DOMContentLoaded', function() {
 
     // Function to initialize Supabase client
     function initSupabase() {
@@ -42,7 +39,6 @@
             }, 500);
         });
     }
-    });
 })();
 
 
